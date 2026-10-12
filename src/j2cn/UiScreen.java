@@ -148,7 +148,7 @@ public class UiScreen extends Canvas implements CommandListener {
         frameInit = true;
     }
 
-    private void paintFocusFrame(Graphics g) {
+    private void paintHaloBehind(Graphics g) {
         Widget w = currentFocused();
         if (w == null) return;
         if (!frameInit) snapFrameTo(w);
@@ -156,6 +156,14 @@ public class UiScreen extends Canvas implements CommandListener {
         if (w.style() != null) rad = w.style().radius + 3;
         g.setColor(theme.focusHalo);
         Widget.fillRound(g, fx, fy, fw, fh, rad);
+    }
+
+    private void paintFocusOutlines(Graphics g) {
+        Widget w = currentFocused();
+        if (w == null) return;
+        if (!frameInit) snapFrameTo(w);
+        int rad = 7;
+        if (w.style() != null) rad = w.style().radius + 3;
         g.setColor(theme.focus);
         Widget.drawRound(g, fx, fy, fw, fh, rad);
         Widget.drawRound(g, fx + 1, fy + 1, fw - 2, fh - 2, rad > 0 ? rad - 1 : 0);
@@ -187,8 +195,9 @@ public class UiScreen extends Canvas implements CommandListener {
             int topBar = 26;
             g.translate(0, topBar - scrollCur);
             g.setClip(0, scrollCur - topBar, sw, sh - topBar);
+            paintHaloBehind(g);
             root.paint(g, font, theme);
-            paintFocusFrame(g);
+            paintFocusOutlines(g);
             paintPressFlash(g, now);
             g.translate(0, scrollCur - topBar);
             g.setClip(0, 0, sw, sh);
