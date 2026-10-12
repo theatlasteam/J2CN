@@ -24,7 +24,6 @@ public class Slider extends Widget {
     }
 
     public void paint(Graphics g, UiFont font, Theme theme) {
-        if (focused) paintFocusHalo(g, theme, 4);
         font.drawLine(g, label + " " + value + "%", x + style.padH, y + style.padV,
                 w - style.padH * 2, 0, false, theme.mutedForeground);
         int ty = y + style.padV + UiFont.LINE + 4;

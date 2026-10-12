@@ -65,6 +65,38 @@ public final class J2cnTest {
         int[][] w = Layout.row(0, 100, new int[]{2, 1, 1}, 0);
         check(w[0][1] == 50 && w[1][1] == 25 && w[2][0] == 75, "row weights");
 
+        // Animation math.
+        check(Anim.lerp(0, 100, 512) == 50, "lerp half");
+        check(Anim.lerp(10, 20, 0) == 10 && Anim.lerp(10, 20, 1024) == 20, "lerp ends");
+        check(Anim.easeOut(0) == 0 && Anim.easeOut(1024) == 1024, "ease ends");
+        check(Anim.easeOut(512) > 512, "ease fast start");
+        boolean mono = true;
+        int prev = -1;
+        for (int t = 0; t <= 1024; t += 64) {
+            int e = Anim.easeOut(t);
+            if (e < prev) mono = false;
+            prev = e;
+        }
+        check(mono, "ease monotonic");
+        check(Anim.progress(1000, 200, 900) == 0, "progress before");
+        check(Anim.progress(1000, 200, 1100) == 512, "progress half");
+        check(Anim.progress(1000, 200, 1300) == 1024, "progress after");
+        check(Anim.approach(5, 5) == 5, "approach rest");
+        int v = 0;
+        int steps = 0;
+        while (v != 100 && steps < 500) {
+            v = Anim.approach(v, 100);
+            steps++;
+        }
+        check(v == 100 && steps < 100, "approach converges");
+        v = 100;
+        steps = 0;
+        while (v != 0 && steps < 500) {
+            v = Anim.approach(v, 0);
+            steps++;
+        }
+        check(v == 0, "approach converges down");
+
         System.out.println("j2cn: " + passed + " passed, " + failed + " failed");
         if (failed > 0) System.exit(1);
     }

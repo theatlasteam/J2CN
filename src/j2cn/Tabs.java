@@ -50,13 +50,6 @@ public class Tabs extends Widget {
     public void paint(Graphics g, UiFont font, Theme theme) {
         int n = titles.length;
         int tw = w / (n == 0 ? 1 : n);
-        if (focused) {
-            g.setColor(theme.focusHalo);
-            fillRound(g, x - 3, y - 2, w + 6, UiFont.LINE + 12, 6);
-            g.setColor(theme.focus);
-            drawRound(g, x - 3, y - 2, w + 6, UiFont.LINE + 12, 6);
-            drawRound(g, x - 2, y - 1, w + 4, UiFont.LINE + 10, 5);
-        }
         for (int i = 0; i < n; i++) {
             int tx = x + i * tw;
             if (i == selected) {
@@ -75,6 +68,13 @@ public class Tabs extends Widget {
     public void collectFocusable(java.util.Vector out) {
         super.collectFocusable(out);
         pages[selected].collectFocusable(out);
+    }
+
+    public void focusRect(int[] out) {
+        out[0] = x;
+        out[1] = y;
+        out[2] = w;
+        out[3] = UiFont.LINE + 12;
     }
 
     public boolean handleKey(int keyCode, int gameAction) {

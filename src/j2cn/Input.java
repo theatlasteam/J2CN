@@ -35,7 +35,6 @@ public class Input extends Widget {
     public void paint(Graphics g, UiFont font, Theme theme) {
         int bg = style.bg >= 0 ? style.bg : theme.card;
         int fg = style.fg >= 0 ? style.fg : theme.foreground;
-        if (focused) paintFocusHalo(g, theme, style.radius);
         g.setColor(bg);
         fillRound(g, x, y, w, h, style.radius);
         int b = style.border >= 0 ? style.border : (focused ? theme.focus : theme.input);

@@ -21,7 +21,6 @@ public class Switch extends Widget {
 
     public void paint(Graphics g, UiFont font, Theme theme) {
         int fg = style.fg >= 0 ? style.fg : theme.foreground;
-        if (focused) paintFocusHalo(g, theme, 9);
         int sw = 34;
         int sh = 18;
         int sx = x + w - style.padH - sw;

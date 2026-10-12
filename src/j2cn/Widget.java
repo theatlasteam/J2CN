@@ -39,6 +39,18 @@ public abstract class Widget {
         if (visible && focusable) out.addElement(this);
     }
 
+    /**
+     * Bounds the screen-level focus frame should wrap, in the widget's
+     * own coordinates. Defaults to full bounds; Tabs narrows it to the
+     * strip so the frame does not swallow the whole page.
+     */
+    public void focusRect(int[] out) {
+        out[0] = x;
+        out[1] = y;
+        out[2] = w;
+        out[3] = h;
+    }
+
     // --- drawing helpers (MIDP has no roundRect) ---
 
     public static void fillRound(Graphics g, int x, int y, int w, int h, int r) {

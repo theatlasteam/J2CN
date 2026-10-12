@@ -21,7 +21,6 @@ public class CheckBox extends Widget {
 
     public void paint(Graphics g, UiFont font, Theme theme) {
         int fg = style.fg >= 0 ? style.fg : theme.foreground;
-        if (focused) paintFocusHalo(g, theme, 4);
         int box = UiFont.LINE - 2;
         int by = y + (h - box) / 2;
         if (checked) {

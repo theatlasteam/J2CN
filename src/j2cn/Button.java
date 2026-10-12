@@ -23,7 +23,6 @@ public class Button extends Widget {
     public void paint(Graphics g, UiFont font, Theme theme) {
         int bg = style.bg >= 0 ? style.bg : theme.primary;
         int fg = style.fg >= 0 ? style.fg : theme.primaryForeground;
-        if (focused) paintFocusHalo(g, theme, style.radius);
         g.setColor(bg);
         fillRound(g, x, y, w, h, style.radius);
         if (style.borderWidth > 0) {
