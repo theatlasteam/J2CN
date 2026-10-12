@@ -97,6 +97,14 @@ public final class J2cnTest {
         }
         check(v == 0, "approach converges down");
 
+        // Scroll-follow keeps the whole widget plus frame margin visible.
+        check(Anim.follow(280, 30, 294, 0, 4) == 20, "follow scrolls down");
+        check(Anim.follow(10, 30, 294, 30, 4) == 6, "follow scrolls up");
+        check(Anim.follow(50, 30, 294, 0, 4) == 0, "follow holds when visible");
+        // Regression: widget bottom 18px past the viewport must scroll
+        // (old code left it hanging off the bottom edge).
+        check(Anim.follow(300, 30, 294, 24, 4) == 40, "follow bottom edge");
+
         System.out.println("j2cn: " + passed + " passed, " + failed + " failed");
         if (failed > 0) System.exit(1);
     }

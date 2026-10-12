@@ -33,6 +33,16 @@ public final class Anim {
     }
 
     /**
+     * Scroll offset so [y, y+h] is visible in a viewport of height viewH,
+     * keeping margin px clear for focus frames. Pure; unit-tested.
+     */
+    public static int follow(int y, int h, int viewH, int scroll, int margin) {
+        if (y - margin < scroll) return y - margin;
+        if (y + h + margin > scroll + viewH) return y + h + margin - viewH;
+        return scroll;
+    }
+
+    /**
      * One frame of exponential approach: moves cur a quarter of the way
      * to target, minimum 1px so it always converges. Returns the new value.
      */

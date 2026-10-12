@@ -129,13 +129,11 @@ public class UiScreen extends Canvas implements CommandListener {
     private void ensureVisible() {
         Widget w = currentFocused();
         if (w == null) return;
-        int topBar = 26;
-        int viewH = getHeight() - topBar;
-        if (w.y < scrollTarget + topBar) scrollTarget = w.y - topBar;
-        if (w.y + w.h > scrollTarget + topBar + viewH - 8) {
-            scrollTarget = w.y + w.h - (topBar + viewH - 8);
-        }
-        scrollTarget = clampScroll(scrollTarget);
+        // All in content coordinates: viewport is [scroll, scroll + viewH].
+        // Margin 4 keeps the focus frame (extends ~3px past the widget)
+        // fully on screen instead of hanging off the bottom edge.
+        int viewH = getHeight() - 26;
+        scrollTarget = clampScroll(Anim.follow(w.y, w.h, viewH, scrollTarget, 4));
         startAnim();
     }
 
@@ -194,7 +192,7 @@ public class UiScreen extends Canvas implements CommandListener {
         if (root != null) {
             int topBar = 26;
             g.translate(0, topBar - scrollCur);
-            g.setClip(0, scrollCur - topBar, sw, sh - topBar);
+            g.setClip(0, scrollCur, sw, sh - topBar);
             paintHaloBehind(g);
             root.paint(g, font, theme);
             paintFocusOutlines(g);
