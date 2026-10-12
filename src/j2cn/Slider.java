@@ -24,6 +24,7 @@ public class Slider extends Widget {
     }
 
     public void paint(Graphics g, UiFont font, Theme theme) {
+        if (focused) paintFocusHalo(g, theme, 4);
         font.drawLine(g, label + " " + value + "%", x + style.padH, y + style.padV,
                 w - style.padH * 2, 0, false, theme.mutedForeground);
         int ty = y + style.padV + UiFont.LINE + 4;
@@ -37,8 +38,9 @@ public class Slider extends Widget {
         if (kx < x + style.padH) kx = x + style.padH;
         g.setColor(theme.card);
         g.fillArc(kx, ty - 4, 12, 12, 0, 360);
-        g.setColor(focused ? theme.ring : theme.border);
+        g.setColor(focused ? theme.focus : theme.border);
         g.drawArc(kx, ty - 4, 12, 12, 0, 360);
+        if (focused) g.drawArc(kx - 1, ty - 5, 14, 14, 0, 360);
     }
 
     public boolean handleKey(int keyCode, int gameAction) {

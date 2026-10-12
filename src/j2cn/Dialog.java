@@ -55,8 +55,8 @@ public class Dialog extends Widget {
         g.setColor(theme.primary);
         int okx = cancelText != null ? dx + 10 + bw + 10 : dx + 10;
         if (focusOk) {
-            g.setColor(theme.ring);
-            fillRound(g, okx - 1, by - 1, bw + 2, UiFont.LINE + 12, 5);
+            g.setColor(theme.focus);
+            fillRound(g, okx - 2, by - 2, bw + 4, UiFont.LINE + 14, 6);
             g.setColor(theme.primary);
             fillRound(g, okx, by, bw, UiFont.LINE + 10, 4);
         } else {
@@ -67,8 +67,8 @@ public class Dialog extends Widget {
             g.setColor(theme.muted);
             int cx = dx + 10;
             if (!focusOk) {
-                g.setColor(theme.ring);
-                fillRound(g, cx - 1, by - 1, bw + 2, UiFont.LINE + 12, 5);
+                g.setColor(theme.focus);
+                fillRound(g, cx - 2, by - 2, bw + 4, UiFont.LINE + 14, 6);
                 g.setColor(theme.muted);
                 fillRound(g, cx, by, bw, UiFont.LINE + 10, 4);
             } else {

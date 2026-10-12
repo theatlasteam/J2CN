@@ -1,9 +1,9 @@
 #!/usr/bin/env python3
-"""Render the Rokia UI bitmap font: 256x352 atlas, 16x16 cells, 351 advances.
+"""Render the J2CN bitmap font: 256x352 atlas, 16x16 cells, 351 advances.
 
 Glyph order matches UiFont: ASCII U+0020..U+007E, then Cyrillic U+0400..U+04FF.
-Default source is DejaVu Sans (clean grotesque, ShadCN-adjacent look).
-Requires Pillow.
+Source is Inter Tight (SIL Open Font License 1.1, see tools/OFL.txt),
+bundled as tools/InterTight.ttf. Requires Pillow.
 """
 import argparse
 from PIL import Image, ImageDraw, ImageFont
@@ -11,7 +11,7 @@ from PIL import Image, ImageDraw, ImageFont
 GLYPHS = [chr(c) for c in range(32, 127)] + [chr(c) for c in range(1024, 1280)]
 
 p = argparse.ArgumentParser()
-p.add_argument("--font", default="/usr/share/fonts/TTF/DejaVuSans.ttf")
+p.add_argument("--font", default="tools/InterTight.ttf")
 p.add_argument("--out", default="assets/font.png")
 p.add_argument("--metrics", default="assets/font.metrics")
 p.add_argument("--size", type=int, default=13)

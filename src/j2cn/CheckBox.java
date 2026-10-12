@@ -21,6 +21,7 @@ public class CheckBox extends Widget {
 
     public void paint(Graphics g, UiFont font, Theme theme) {
         int fg = style.fg >= 0 ? style.fg : theme.foreground;
+        if (focused) paintFocusHalo(g, theme, 4);
         int box = UiFont.LINE - 2;
         int by = y + (h - box) / 2;
         if (checked) {
@@ -32,11 +33,11 @@ public class CheckBox extends Widget {
         } else {
             g.setColor(theme.card);
             g.fillRect(x + style.padH, by, box, box);
-            g.setColor(focused ? theme.ring : theme.border);
+            g.setColor(focused ? theme.focus : theme.border);
             g.drawRect(x + style.padH, by, box - 1, box - 1);
         }
         font.drawLine(g, text, x + style.padH + box + 6, y + (h - UiFont.LINE) / 2,
-                w - style.padH - box - 6, 0, false, fg);
+                w - style.padH - box - 6, 0, focused, fg);
     }
 
     public boolean handleKey(int keyCode, int gameAction) {

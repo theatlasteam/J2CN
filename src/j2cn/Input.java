@@ -35,13 +35,13 @@ public class Input extends Widget {
     public void paint(Graphics g, UiFont font, Theme theme) {
         int bg = style.bg >= 0 ? style.bg : theme.card;
         int fg = style.fg >= 0 ? style.fg : theme.foreground;
+        if (focused) paintFocusHalo(g, theme, style.radius);
         g.setColor(bg);
         fillRound(g, x, y, w, h, style.radius);
-        int b = style.border >= 0 ? style.border : (focused ? theme.ring : theme.input);
+        int b = style.border >= 0 ? style.border : (focused ? theme.focus : theme.input);
         g.setColor(b);
         drawRound(g, x, y, w, h, style.radius);
         if (focused) {
-            g.setColor(theme.ring);
             drawRound(g, x + 1, y + 1, w - 2, h - 2, style.radius > 0 ? style.radius - 1 : 0);
         }
         font.drawLine(g, label, x + style.padH, y + style.padV, w - style.padH * 2, 0, false, theme.mutedForeground);
@@ -50,7 +50,7 @@ public class Input extends Widget {
         font.drawLine(g, v, x + style.padH, y + style.padV + UiFont.LINE, w - style.padH * 2, 0, false, vc);
         if (focused && value.length() > 0) {
             int tw = font.width(v);
-            g.setColor(theme.ring);
+            g.setColor(theme.focus);
             g.fillRect(x + style.padH + tw + 1, y + style.padV + UiFont.LINE, 2, UiFont.LINE - 2);
         }
     }

@@ -54,8 +54,7 @@ public abstract class Widget {
         g.fillArc(x + w - 2 * r, y + h - 2 * r, 2 * r, 2 * r, 270, 90);
     }
 
-    public static void drawRound(Graphics g, int x, int y, int w, int h, int r) {
-        if (r <= 0 || w <= 2 * r || h <= 2 * r) {
+    public static void drawRound(Graphics g, int x, int y, int w, int h, int r) {        if (r <= 0 || w <= 2 * r || h <= 2 * r) {
             g.drawRect(x, y, w - 1, h - 1);
             return;
         }
@@ -67,6 +66,20 @@ public abstract class Widget {
         g.drawArc(x + w - 2 * r, y, 2 * r, 2 * r, 0, 90);
         g.drawArc(x, y + h - 2 * r, 2 * r, 2 * r, 180, 90);
         g.drawArc(x + w - 2 * r, y + h - 2 * r, 2 * r, 2 * r, 270, 90);
+    }
+
+    /**
+     * Unmissable focus treatment: pale halo fill behind the widget plus a
+     * double-thick vivid outline. Call first in paint() when focused; the
+     * widget then paints its own body over the middle, leaving a bright
+     * frame visible around it.
+     */
+    protected void paintFocusHalo(Graphics g, Theme theme, int radius) {
+        g.setColor(theme.focusHalo);
+        fillRound(g, x - 3, y - 2, w + 6, h + 4, radius + 3);
+        g.setColor(theme.focus);
+        drawRound(g, x - 3, y - 2, w + 6, h + 4, radius + 3);
+        drawRound(g, x - 2, y - 1, w + 4, h + 2, radius + 2);
     }
 
     protected static int lines(String s) {

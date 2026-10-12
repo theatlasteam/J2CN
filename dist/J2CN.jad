@@ -5,4 +5,4 @@ MIDlet-1: J2CN,/icon.png,j2cn.Showcase
 MicroEdition-Configuration: CLDC-1.1
 MicroEdition-Profile: MIDP-2.0
 MIDlet-Jar-URL: J2CN.jar
-MIDlet-Jar-Size: 67669
+MIDlet-Jar-Size: 64586

@@ -6,8 +6,8 @@ import javax.microedition.lcdui.Image;
 /**
  * Proportional bitmap font. Atlas is 256x352 with 16x16 cells and
  * 351 advance bytes (ASCII U+0020..U+007E then Cyrillic U+0400..U+04FF).
- * Generate with tools/make_font.py. Looks like a clean grotesque
- * (DejaVu Sans) rather than the phone system font.
+ * Generate with tools/make_font.py. The bundled atlas is rendered from
+ * Inter Tight (OFL, see tools/OFL.txt) rather than the phone system font.
  */
 public final class UiFont {
 

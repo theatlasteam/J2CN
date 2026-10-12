@@ -22,6 +22,8 @@ public final class J2cnTest {
         check(light.background == 0xffffff, "light bg");
         check(dark.background == 0x09090b, "dark bg");
         check(light.primary != dark.primary, "primary differs");
+        check(light.focus == 0x2563eb && dark.focus == 0x60a5fa, "focus vivid");
+        check(light.focus != light.primary && light.focusHalo != light.background, "focus distinct");
 
         // Color parsing.
         check(StyleSheet.color("#18181b") == 0x18181b, "hex6");
